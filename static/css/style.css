@@ -148,12 +148,14 @@ form{
 }
 
 a{
-	display: block;
+	display: inline;
 	text-align: right;
 	text-decoration: none;
 	color: #999;
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 	transition: .3s;
+	margin-right: -157px;
+    margin-left: -138px;
 }
 
 a:hover{
@@ -219,4 +221,7 @@ a:hover{
 	.login-content{
 		justify-content: center;
 	}
+}
+.form-gap {
+    padding-top: 70px;
 }

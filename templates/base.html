@@ -15,7 +15,7 @@
 			<img src="{% static '/img/bg.svg' %}">
 		</div>
 		<div class="login-content">
-			<form action="#">
+			<form action="#" method="post">
 				<img src="{% static '/img/avatar.svg' %}">
 				<h2 class="title">Welcome</h2>
            		<div class="input-div one">
@@ -24,7 +24,7 @@
            		   </div>
            		   <div class="div">
            		   		<h5>Username</h5>
-           		   		<input type="text" class="input">
+           		   		<input type="text" class="input" name="name_field">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -33,14 +33,17 @@
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input type="password" class="input">
+           		    	<input type="password" class="input" name="pass_field">
             	   </div>
             	</div>
-            	<a href="#">Forgot Password?</a>
+            	<a class="forgot_pass" href="{% url 'forgot_pass' %}">Forgot Password?</a>
+                <a class="create_new" href="{% url 'create_new' %}">Create New Account</a>
             	<input type="submit" class="btn" value="Login">
             </form>
+
         </div>
     </div>
+
     <script type="text/javascript" src="{% static "js/main.js" %}"> </script>
 </body>
 </html>
