@@ -1,32 +1,57 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
-from . import models
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from .forms import RegisterForm, CreateUserForm
 # Create your views here.
 
 
-@csrf_exempt
 def home(request):
-    usr_name = request.POST.get('name_field')
-    usr_pass = request.POST.get('pass_field')
-    sign_details = models.Login.objects.create(name=usr_name, usr_password=usr_pass)
-    context = {
-        "sign_details": sign_details,
-    }
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home_view')
+    context = {}
     return render(request, 'base.html', context)
 
 
-@csrf_exempt
 def create_new(request):
-    cr_usr_name = request.POST.get('in_name')
-    cr_usr_pass = request.POST.get('in_psw')
-    cr_usr_pass_re = request.POST.get('in_psw_re')
-    created_obj = models.CreateUser.objects.create(user_name=cr_usr_name, password=cr_usr_pass, re_password=cr_usr_pass_re)
-    form_stuff = {
-        'created_obj': created_obj,
-    }
-    return render(request, "pages/new_account.html", form_stuff,)
+    form = RegisterForm()
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request,"User Account created Successfully " + user )
+            return redirect('/')
+    return render(request, "pages/new_account.html", {"form": form})
 
 
 def forgot_pass(request):
-    return render(request, "pages/forgot_pass.html")
+    password = request.POST.get('password')
+
+    # if request.method == 'POST':
+        # username = request.POST.get('username')
+        # email = request.POST.get('email')
+        #
+        # user =
+    context = {
+        password:"password"
+    }
+    return render(request, "pages/forgot_pass.html", password)
+
+
+def register(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+    return render(request, "register.html", {"form": form})
+
+def home_view(request):
+    return render(request, "home.html")

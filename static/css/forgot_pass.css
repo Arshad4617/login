@@ -1,3 +1,24 @@
 .form-gap {
     padding-top: 70px;
 }
+.btn-primary{
+    width: 100%;
+	background: #32be8f !important;
+	color: white !important;
+    display: block;
+    height: 50px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+    background-size: 200%;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 1rem 0;
+    cursor: pointer;
+    transition: .5s;
+}
+/*.btn-primary {*/
+/*    color: #fff;*/
+/*    background-color: #000000;*/
+/*    border-color: #357ebd;*/

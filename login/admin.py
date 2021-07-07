@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import CreateUser, Login
+
+from .models import Login
 
 # Register your models here.
-admin.site.register(CreateUser)
+# admin.site.register(RegisterForm)
 admin.site.register(Login)
